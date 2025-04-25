@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin Tức - Limerence</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #28a745;
+            --primary-dark: #218838;
+            --primary-light: #2ea44f;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #ff4757;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --transition: all 0.3s ease;
+            --shadow-sm: 0 2px 5px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+            --shadow-lg: 0 8px 25px rgba(0,0,0,0.1);
+            --border-radius: 10px;
+            --border-radius-sm: 5px;
+            --border-radius-lg: 15px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Poppins', sans-serif;
+            background: white;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header img.logo {
+            height: 55px;
+            transition: var(--transition);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        header img.logo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-weight: 600;
+        }
+
+        .header-right a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-right a:not(.cart-icon)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: var(--transition);
+            z-index: 0;
+        }
+
+        .header-right a:hover::before {
+            left: 0;
+        }
+
+        .header-right a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .header-right a i {
+            font-size: 1rem;
+            z-index: 1;
+        }
+
+        .header-right a span {
+            z-index: 1;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            flex: 1;
+            max-width: 450px;
+            position: relative;
+            margin: 0 30px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 14px 45px 14px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 15px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            box-shadow: var(--shadow-md);
+            transform: scale(1.02);
+        }
+
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .search-bar button:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .search-bar i {
+            color: var(--primary-color);
+            font-size: 18px;
+        }
+
+        .cart-icon {
+            position: relative;
+            padding: 10px !important;
+            border-radius: 50% !important;
+            background: rgba(255,255,255,0.1);
+            transition: var(--transition);
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+        }
+
+        .cart-icon i {
+            font-size: 18px !important;
+            color: white;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 7px;
+            right: 6px;
+            background: var(--danger-color);
+            color: white;
+            border-radius: 50%;
+            padding: 1px;
+            font-size: 10px;
+            font-weight: bold;
+            min-width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.15) !important;
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 95px;
+            z-index: 999;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul.left-menu {
+            gap: 5px;
+        }
+
+        nav ul.right-menu {
+            font-weight: bold;
+            color: white;
+            align-items: center;
+        }
+
+        nav ul.right-menu i {
+            margin-right: 10px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        nav ul li {
+            margin: 0;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            display: block;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after {
+            width: 60%;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a::before {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .dropdown:hover > a::before {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            min-width: 230px;
+            padding: 10px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            font-weight: 500;
+            color: white;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateX(5px);
+        }
+
+        /* Page Header */
+        .page-header {
+            position: relative;
+            height: 300px;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../img/news-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* News Section */
+        .news-section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .news-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .news-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 360px;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .news-info {
+            padding: 20px;
+        }
+
+        .news-info h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .news-info p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        /* Toast Notifications */
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .toast {
+            background: var(--dark-color);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateX(20px);
+            transition: var(--transition);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, #28a745, #2ea44f);
+            border-left: 5px solid #1e7e34;
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            border-left: 5px solid #bd2130;
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            opacity: 0.7;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(180deg, #333, #222);
+            color: white;
+            padding: 40px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            margin-top: 50px;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .footer-section p, 
+        .footer-section ul {
+            margin: 0;
+            padding: 0;
+            color: #ddd;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin: 12px 0;
+        }
+
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section ul li a i {
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .social-item:hover {
+            transform: translateX(5px);
+        }
+
+        .social-item img {
+            width: 24px;
+            height: 24px;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
+        }
+
+        .social-item a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .social-item a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            width: 100%;
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Loading Animation */
+        .btn-loading {
+            position: relative;
+            pointer-events: none;
+            color: transparent !important;
+        }
+
+        .btn-loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .search-bar {
+                margin: 0 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .search-bar {
+                max-width: 100%;
+                margin: 15px 0;
+            }
+
+            nav .container {
+                flex-direction: column;
+            }
+
+            nav ul.left-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li a {
+                padding: 10px 15px;
+            }
+
+            .news-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .page-header {
+                height: 250px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            nav {
+                top: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <img src="../img/logo.png" alt="Limerence" class="logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm kiếm sản phẩm...">
+            <button type="button" id="search-button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        <div class="header-right">
+            <a href="login.html">
+                <i class="fas fa-user"></i>
+                <span>Đăng nhập</span>
+            </a>
+            <a href="register.html">
+                <i class="fas fa-user-plus"></i>
+                <span>Đăng ký</span>
+            </a>
+            <a href="cart.html" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+    <nav>
+        <div class="container">
+            <ul class="left-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Trang chủ</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> Về chúng tôi</a></li>
+                <li class="dropdown">
+                    <a href="products.html"><i class="fas fa-store"></i> Tất cả sản phẩm</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="products.html?category=do-dung-van-phong"><i class="fas fa-briefcase"></i> Đồ văn phòng</a></li>
+                        <li><a href="products.html?category=dung-cu-hoc-sinh"><i class="fas fa-graduation-cap"></i> Dụng cụ học sinh</a></li>
+                        <li><a href="products.html?category=dung-cu-trang-tri"><i class="fas fa-paint-brush"></i> Dụng cụ trang trí</a></li>
+                        <li><a href="products.html?category=do-dung-gia-dinh"><i class="fas fa-home"></i> Đồ dùng gia đình</a></li>
+                    </ul>
+                </li>
+                <li><a href="news.html"><i class="fas fa-newspaper"></i> Tin Tức</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Liên hệ</a></li>
+            </ul>
+            <ul class="right-menu">
+                <li><i class="fas fa-phone-alt"></i> Hotline: 0902.635.815</li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Tin Tức</h1>
+            <p>Cập nhật những thông tin mới nhất về các mặt hàng tại Limerence</p>
+        </div>
+    </div>
+
+    <!-- New Arrivals News Section -->
+    <section class="news-section">
+        <h2 class="section-title">Thông Tin Hàng Mới</h2>
+        <div class="news-content">
+            <div class="news-card">
+                <div class="news-info">
+                    <h3>Bút Bi Cao Cấp Mới Ra Mắt</h3>
+                    <p>Chúng tôi vừa ra mắt dòng bút bi cao cấp mới với thiết kế tinh tế, mực viết mượt mà, phù hợp cho cả học tập và công việc văn phòng. Sản phẩm hứa hẹn sẽ mang lại trải nghiệm viết tuyệt vời cho người dùng.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-info">
+                    <h3>Tập Vở Hoa Văn Độc Đáo</h3>
+                    <p>Bộ sưu tập tập vở mới với hoa văn sáng tạo vừa được cập nhật tại Limerence. Sản phẩm sử dụng giấy chất lượng cao, không lem mực, rất phù hợp cho học sinh và sinh viên.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-info">
+                    <h3>Hộp Bút Đa Năng Có Sẵn</h3>
+                    <p>Hộp bút đa năng với nhiều ngăn tiện lợi và thiết kế thời trang đã có mặt tại cửa hàng. Đây là lựa chọn lý tưởng cho các bạn học sinh và sinh viên cần một sản phẩm vừa đẹp vừa thực dụng.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions News Section -->
+    <section class="news-section">
+        <h2 class="section-title">Thông Tin Khuyến Mãi</h2>
+        <div class="news-content">
+            <div class="news-card">
+                <div class="news-info">
+                    <h3>Khuyến Mãi Bút Chì Màu 24 Màu</h3>
+                    <p>Bộ bút chì màu 24 màu chất lượng cao đang được giảm giá đặc biệt trong tuần này. Sản phẩm với màu sắc rực rỡ, rất phù hợp cho các hoạt động vẽ và sáng tạo.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-info">
+                    <h3>Giảm Giá Máy Tính Cầm Tay</h3>
+                    <p>Máy tính cầm tay đa chức năng hiện đang được giảm giá 20% đến hết tháng. Đây là sản phẩm không thể thiếu cho học sinh với nhiều tính năng hỗ trợ học tập hiệu quả.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-info">
+                    <h3>Ưu Đãi Gôm Tẩy Cao Cấp</h3>
+                    <p>Gôm tẩy cao cấp không bụi, dễ sử dụng đang được giảm giá 30% trong chương trình khuyến mãi đặc biệt. Sản phẩm đảm bảo hỗ trợ tối ưu cho việc học tập và làm việc.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-section">
+            <h3>Liên hệ</h3>
+            <p>Văn phòng phẩm Limerence</p>
+            <p>108 Quách Điêu, xã VLA, H. Bình Chánh, TP.HCM</p>
+            <p>Thứ 2 đến Thứ 7 (7:00 - 18:00)</p>
+            <p>Hotline: 0902635815</p>
+        </div>
+        <div class="footer-section">
+            <h3>Truy cập</h3>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-chevron-right"></i> Trang chủ</a></li>
+                <li><a href="products.html"><i class="fas fa-chevron-right"></i> Sản phẩm</a></li>
+                <li><a href="news.html"><i class="fas fa-chevron-right"></i> Tin tức</a></li>
+                <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Hỗ trợ khách hàng</h3>
+            <ul>
+                <li><a href="shipping.html"><i class="fas fa-chevron-right"></i> Chính sách vận chuyển</a></li>
+                <li><a href="return.html"><i class="fas fa-chevron-right"></i> Chính sách đổi trả</a></li>
+                <li><a href="payment.html"><i class="fas fa-chevron-right"></i> Phương thức thanh toán</a></li>
+                <li><a href="loyalty.html"><i class="fas fa-chevron-right"></i> Chương trình khách hàng thân thiết</a></li>
+                <li><a href="faq.html"><i class="fas fa-chevron-right"></i> Câu hỏi thường gặp</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Theo dõi chúng tôi</h3>
+            <div class="social-icons">
+                <div class="social-item">
+                    <a href="https://instagram.com/limerence"><img src="../img/instagram.png" alt="Instagram"></a>
+                    <a href="https://instagram.com/limerence">Instagram</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://twitter.com/limerence"><img src="../img/twitter.png" alt="X"></a>
+                    <a href="https://twitter.com/limerence">X (Twitter)</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://facebook.com/limerence"><img src="../img/facebook.png" alt="Fanpage"></a>
+                    <a href="https://facebook.com/limerence">Fanpage</a>
+                </div>
+                <div class="social-item">
+                    <a href="https://tiktok.com/@limerence"><img src="../img/tiktok.png" alt="Tiktok"></a>
+                    <a href="https://tiktok.com/@limerence">Tiktok</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© Bản quyền thuộc về Văn phòng phẩm Limerence | Cung cấp bởi Sapo</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Toast Notification Function
+        function showToast(message, type = 'success') {
+            const toastId = 'toast-' + Date.now();
+            const toast = `
+                <div class="toast ${type}" id="${toastId}">
+                    <div class="toast-content">
+                        <div class="toast-icon">
+                            <i class="fas ${type === 'success' ? 'fa-check' : 'fa-times'}"></i>
+                        </div>
+                        <span>${message}</span>
+                    </div>
+                    <button class="toast-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            $('#toast-container').append(toast);
+            
+            setTimeout(() => {
+                $(`#${toastId}`).addClass('show');
+            }, 100);
+            
+            setTimeout(() => {
+                $(`#${toastId}`).removeClass('show');
+                setTimeout(() => {
+                    $(`#${toastId}`).remove();
+                }, 300);
+            }, 5000);
+            
+            $(`#${toastId} .toast-close`).click(function() {
+                $(`#${toastId}`).removeClass('show');
+                setTimeout(() => {
+                    $(`#${toastId}`).remove();
+                }, 300);
+            });
+        }
+
+        // Update cart count from localStorage
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            $('#cart-count').text(totalItems);
+        }
+
+        $(document).ready(function() {
+            updateCartCount();
+
+            // Search functionality
+            $('#search-button').click(function() {
+                const searchQuery = $('.search-bar input').val().trim();
+                if (searchQuery) {
+                    window.location.href = `products.html?search=${encodeURIComponent(searchQuery)}`;
+                } else {
+                    showToast('Vui lòng nhập từ khóa tìm kiếm', 'error');
+                }
+            });
+
+            $('.search-bar input').keypress(function(e) {
+                if (e.which === 13) {
+                    $('#search-button').click();
+                }
+            });
+
+            // Animation on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.news-card');
+                
+                elements.forEach(element => {
+                    const position = element.getBoundingClientRect();
+                    if(position.top < window.innerHeight && position.bottom >= 0) {
+                        element.style.animation = 'fadeIn 1s forwards';
+                        element.style.opacity = '1';
+                    }
+                });
+            }
+
+            setTimeout(animateOnScroll, 100);
+            window.addEventListener('scroll', animateOnScroll);
+        });
+    </script>
+</body>
+</html>
