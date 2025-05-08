@@ -446,6 +446,9 @@
                 width: 100%;
                 position: relative;
                 overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .product-image img {
@@ -1040,95 +1043,95 @@
         <script>
             // Product data (synced with product-detail.html)
             const products = [
-                {
-                    id: '1',
-                    title: 'Sổ tay da cao cấp Limerence',
-                    category: 'do-dung-van-phong',
-                    badge: 'Bán chạy',
-                    code: 'SP001',
-                    image: '../img/product-notebook.jpg',
-                    currentPrice: '120.000đ',
-                    oldPrice: '150.000đ',
-                    description: 'Sổ tay da cao cấp Limerence được làm từ chất liệu da PU mềm mại, thiết kế tinh tế với các đường may chắc chắn. Sổ có 200 trang giấy chất lượng cao, không lem mực, phù hợp cho việc ghi chú, lập kế hoạch hoặc làm nhật ký cá nhân.'
-                },
-                {
-                    id: '2',
-                    title: 'Bút bi gel Limerence 0.5mm - Bộ 10 màu',
-                    category: 'dung-cu-hoc-sinh',
-                    badge: 'Mới',
-                    code: 'SP002',
-                    image: '../img/product-pen.jpg',
-                    currentPrice: '85.000đ',
-                    oldPrice: '100.000đ',
-                    description: 'Bộ 10 bút bi gel Limerence với đầu bút 0.5mm, mực viết mượt mà, màu sắc rực rỡ. Sản phẩm lý tưởng cho học sinh, sinh viên và những ai yêu thích sáng tạo với màu sắc trong ghi chú và bullet journal.'
-                },
-                {
-                    id: '3',
-                    title: 'Hộp đựng bút đa năng kiêm giá đỡ điện thoại',
-                    category: 'do-dung-van-phong',
-                    badge: '',
-                    code: 'SP003',
-                    image: '../img/product-organizer.jpg',
-                    currentPrice: '75.000đ',
-                    oldPrice: '90.000đ',
-                    description: 'Hộp đựng bút đa năng được thiết kế hiện đại, có ngăn chứa rộng rãi và tích hợp giá đỡ điện thoại tiện lợi. Sản phẩm giúp bàn làm việc của bạn gọn gàng hơn, phù hợp cho văn phòng và học tập.'
-                },
-                {
-                    id: '4',
-                    title: 'Bìa kẹp hồ sơ A4 cao cấp - Bộ 5 cái',
-                    category: 'do-dung-van-phong',
-                    badge: 'Giảm giá',
-                    code: 'SP004',
-                    image: '../img/product-folder.jpg',
-                    currentPrice: '60.000đ',
-                    oldPrice: '95.000đ',
-                    description: 'Bộ 5 bìa kẹp hồ sơ A4 cao cấp, làm từ nhựa PP bền bỉ, chống thấm nước. Sản phẩm giúp lưu trữ tài liệu an toàn và chuyên nghiệp, phù hợp cho văn phòng và học tập.'
-                },
-                {
-                    id: '5',
-                    title: 'Sổ kế hoạch năm 2025 - Bìa cứng',
-                    category: 'dung-cu-hoc-sinh',
-                    badge: 'Mới',
-                    code: 'SP005',
-                    image: '../img/product-planner.jpg',
-                    currentPrice: '150.000đ',
-                    oldPrice: '180.000đ',
-                    description: 'Sổ kế hoạch năm 2025 với bìa cứng chắc chắn, thiết kế trang nhã. Sổ có bố cục khoa học, giúp bạn lập kế hoạch công việc và học tập hiệu quả suốt cả năm.'
-                },
-                {
-                    id: '6',
-                    title: 'Máy tính Casio FX-580VN X - Chính hãng',
-                    category: 'do-dung-van-phong',
-                    badge: 'Mới',
-                    code: 'SP006',
-                    image: '../img/product-calculator.jpg',
-                    currentPrice: '650.000đ',
-                    oldPrice: '720.000đ',
-                    description: 'Máy tính Casio FX-580VN X chính hãng, hỗ trợ nhiều tính năng tính toán nâng cao. Sản phẩm lý tưởng cho học sinh, sinh viên và dân văn phòng cần xử lý số liệu phức tạp.'
-                },
-                {
-                    id: '7',
-                    title: 'Bộ sticker trang trí bullet journal - 10 tấm',
-                    category: 'dung-cu-trang-tri',
-                    badge: 'Mới',
-                    code: 'SP007',
-                    image: '../img/product-stickers.jpg',
-                    currentPrice: '45.000đ',
-                    oldPrice: '60.000đ',
-                    description: 'Bộ 10 tấm sticker trang trí bullet journal với thiết kế dễ thương, đa dạng chủ đề. Sản phẩm giúp bạn trang trí sổ tay, nhật ký thêm sinh động và cá nhân hóa.'
-                },
-                {
-                    id: '8',
-                    title: 'Bút highlight pastel - Bộ 6 màu',
-                    category: 'dung-cu-hoc-sinh',
-                    badge: 'Mới',
-                    code: 'SP008',
-                    image: '../img/product-markers.jpg',
-                    currentPrice: '75.000đ',
-                    oldPrice: '90.000đ-dihydroxylation',
-                    description: 'Bộ 6 bút highlight màu pastel, mực tươi sáng, không lem. Sản phẩm hoàn hảo để đánh dấu tài liệu, ghi chú quan trọng hoặc làm nổi bật các ý chính trong học tập.'
-                }
-            ];
+            {
+                id: '1',
+                title: 'Sổ tay cao cấp Limerence',
+                category: 'do-dung-van-phong',
+                badge: 'Bán chạy',
+                code: 'SP001',
+                image: '../img/so.jpg',
+                currentPrice: '40.000đ',
+                oldPrice: '50.000đ',
+                description: 'Sổ tay cao cấp Limerence được làm từ chất liệu mềm mại, thiết kế tinh tế với các đường may chắc chắn. Sổ có 200 trang giấy chất lượng cao, không lem mực, phù hợp cho việc ghi chú, lập kế hoạch hoặc làm nhật ký cá nhân.'
+            },
+            {
+                id: '2',
+                title: 'Bút bi gel Limerence 0.5mm - Bộ 10 màu',
+                category: 'dung-cu-hoc-sinh',
+                badge: 'Mới',
+                code: 'SP002',
+                image: '../img/pen.webp',
+                currentPrice: '85.000đ',
+                oldPrice: '100.000đ',
+                description: 'Bộ 10 bút bi gel Limerence với đầu bút 0.5mm, mực viết mượt mà, màu sắc rực rỡ. Sản phẩm lý tưởng cho học sinh, sinh viên và những ai yêu thích sáng tạo với màu sắc trong ghi chú và bullet journal.'
+            },
+            {
+                id: '3',
+                title: 'Hộp đựng bút nhựa',
+                category: 'do-dung-van-phong',
+                badge: '',
+                code: 'SP003',
+                image: '../img/hopbut.jpg',
+                currentPrice: '75.000đ',
+                oldPrice: '90.000đ',
+                description: 'Hộp đựng bút đa năng được thiết kế hiện đại, có ngăn chứa rộng rãi. Sản phẩm giúp bàn làm việc của bạn gọn gàng hơn, phù hợp cho văn phòng và học tập.'
+            },
+            {
+                id: '4',
+                title: 'Bìa kẹp hồ sơ A4 cao cấp - Bộ 5 cái',
+                category: 'do-dung-van-phong',
+                badge: 'Giảm giá',
+                code: 'SP004',
+                image: '../img/bia.webp',
+                currentPrice: '60.000đ',
+                oldPrice: '95.000đ',
+                description: 'Bộ 5 bìa kẹp hồ sơ A4 cao cấp, làm từ nhựa PP bền bỉ, chống thấm nước. Sản phẩm giúp lưu trữ tài liệu an toàn và chuyên nghiệp, phù hợp cho văn phòng và học tập.'
+            },
+            {
+                id: '5',
+                title: 'Sổ kế hoạch năm 2025 - Bìa cứng',
+                category: 'dung-cu-hoc-sinh',
+                badge: 'Mới',
+                code: 'SP005',
+                image: '../img/sohs.jpg',
+                currentPrice: '150.000đ',
+                oldPrice: '180.000đ',
+                description: 'Sổ kế hoạch năm 2025 với bìa cứng chắc chắn, thiết kế trang nhã. Sổ có bố cục khoa học, giúp bạn lập kế hoạch công việc và học tập hiệu quả suốt cả năm.'
+            },
+            {
+                id: '6',
+                title: 'Máy tính Casio FX-580VN X - Chính hãng',
+                category: 'do-dung-van-phong',
+                badge: 'Mới',
+                code: 'SP006',
+                image: '../img/maytinh.jpg',
+                currentPrice: '650.000đ',
+                oldPrice: '720.000đ',
+                description: 'Máy tính Casio FX-580VN X chính hãng, hỗ trợ nhiều tính năng tính toán nâng cao. Sản phẩm lý tưởng cho học sinh, sinh viên và dân văn phòng cần xử lý số liệu phức tạp.'
+            },
+            {
+                id: '7',
+                title: 'Bộ sticker trang trí bullet journal - 10 tấm',
+                category: 'dung-cu-trang-tri',
+                badge: 'Mới',
+                code: 'SP007',
+                image: '../img/sticker.jpg',
+                currentPrice: '45.000đ',
+                oldPrice: '60.000đ',
+                description: 'Bộ 10 tấm sticker trang trí bullet journal với thiết kế dễ thương, đa dạng chủ đề. Sản phẩm giúp bạn trang trí sổ tay, nhật ký thêm sinh động và cá nhân hóa.'
+            },
+            {
+                id: '8',
+                title: 'Bút highlight pastel - Bộ 6 màu',
+                category: 'dung-cu-hoc-sinh',
+                badge: 'Mới',
+                code: 'SP008',
+                image: '../img/pen2.jpg',
+                currentPrice: '75.000đ',
+                oldPrice: '90.000đ',
+                description: 'Bộ 6 bút highlight màu pastel, mực tươi sáng, không lem. Sản phẩm hoàn hảo để đánh dấu tài liệu, ghi chú quan trọng hoặc làm nổi bật các ý chính trong học tập.'
+            }
+        ];
 
             // Category mapping for breadcrumb
             const categoryNames = {
